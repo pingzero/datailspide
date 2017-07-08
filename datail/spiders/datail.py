@@ -8,3 +8,8 @@ class datailSpide(scrapy.Spider):
 		title=response.xpath(".//div[@class='swipeboxEx']/div/div[3]/h2/a/text()").extract()
 		img=response.xpath(".//div[@class='swipeboxEx']/div/a/img/@data-original").extract()
 		url=response.xpath(".//div[@class='swipeboxEx']/div/div[3]/h2/a/@href").extract()
+		for t,i,u in zip(title,img,url):
+			item['title']=t
+			item['img']=i
+			item['url']=u
+			yield item
