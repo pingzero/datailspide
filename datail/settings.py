@@ -14,7 +14,7 @@ BOT_NAME = 'datail'
 SPIDER_MODULES = ['datail.spiders']
 NEWSPIDER_MODULE = 'datail.spiders'
 
-
+# JOBDIR='pause' #断点时自动从断点处开始
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'datail (+http://www.yourdomain.com)'
 

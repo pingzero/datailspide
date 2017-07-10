@@ -2,7 +2,14 @@ import scrapy
 from ..items import DatailItem
 class datailSpide(scrapy.Spider):
 	name='datail'
-	start_urls=['http://699pic.com/tupian/lvxing.html']
+	f=open('D:/myfile/python/datailspide/url.txt','r')
+	if f:
+		url=[]
+		url.append(f.read())
+		start_urls=url
+		f.close()
+	else:
+		start_urls=['http://699pic.com/tupian/lvxing.html']
 	def parse(self,response):
 		urls=response.xpath(".//div[@class='swipeboxEx']/div/div[3]/h2/a/@href").extract()
 		for datail_url in urls:
@@ -12,6 +19,9 @@ class datailSpide(scrapy.Spider):
 		next_url=response.xpath(".//a[@class='downPage']/@href").extract()[0]
 		if next_url:
 			next_url='http://699pic.com'+next_url
+			f=open('D:/myfile/python/datailspide/url.txt','w')
+			f.write(next_url)
+			f.close()
 			yield scrapy.Request(next_url,callback=self.parse)
 	def parse_datail(self,response):
 		item=DatailItem()
